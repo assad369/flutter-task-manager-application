@@ -39,6 +39,9 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
             itemBuilder: (context, index) {
               return TaskItem(
                 taskModel: _cancelledTaskList[index],
+                onUpdateTask: () {
+                  _getCancelledTasks();
+                },
               );
             },
           ),
@@ -57,8 +60,8 @@ class _CancelledTaskScreenState extends State<CancelledTaskScreen> {
         await NetworkCaller.getRequest(Urls.getCancelledTask);
 
     if (response.isSuccess) {
-      TaskListsWrapperModel taskListsWrapperModel =
-          TaskListsWrapperModel.fromJson(response.responseData);
+      TaskListWrapperModel taskListsWrapperModel =
+          TaskListWrapperModel.fromJson(response.responseData);
       _cancelledTaskList = taskListsWrapperModel.taskList ?? [];
     } else {
       if (mounted) {

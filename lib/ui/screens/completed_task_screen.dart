@@ -42,6 +42,9 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
             itemBuilder: (context, index) {
               return TaskItem(
                 taskModel: _completedTaskList[index],
+                onUpdateTask: () {
+                  _getCompletedTasks();
+                },
               );
             },
           ),
@@ -60,8 +63,8 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
         await NetworkCaller.getRequest(Urls.getCompletedTask);
 
     if (response.isSuccess) {
-      TaskListsWrapperModel taskListsWrapperModel =
-          TaskListsWrapperModel.fromJson(response.responseData);
+      TaskListWrapperModel taskListsWrapperModel =
+          TaskListWrapperModel.fromJson(response.responseData);
       _completedTaskList = taskListsWrapperModel.taskList ?? [];
     } else {
       if (mounted) {

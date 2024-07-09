@@ -39,6 +39,9 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
             itemBuilder: (context, index) {
               return TaskItem(
                 taskModel: _progressTaskList[index],
+                onUpdateTask: () {
+                  _getProgressTasks();
+                },
               );
             },
           ),
@@ -57,8 +60,8 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
         await NetworkCaller.getRequest(Urls.getProgressTask);
 
     if (response.isSuccess) {
-      TaskListsWrapperModel taskListsWrapperModel =
-          TaskListsWrapperModel.fromJson(response.responseData);
+      TaskListWrapperModel taskListsWrapperModel =
+          TaskListWrapperModel.fromJson(response.responseData);
       _progressTaskList = taskListsWrapperModel.taskList ?? [];
     } else {
       if (mounted) {

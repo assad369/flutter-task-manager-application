@@ -1,12 +1,12 @@
 import 'package:task_manager/data/models/task_model.dart';
 
-class TaskListsWrapperModel {
+class TaskListWrapperModel {
   String? status;
   List<TaskModel>? taskList;
 
-  TaskListsWrapperModel({this.status, this.taskList});
+  TaskListWrapperModel({this.status, this.taskList});
 
-  TaskListsWrapperModel.fromJson(Map<String, dynamic> json) {
+  TaskListWrapperModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
       taskList = <TaskModel>[];
